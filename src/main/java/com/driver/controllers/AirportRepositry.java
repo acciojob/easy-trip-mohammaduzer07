@@ -64,7 +64,7 @@ public class AirportRepositry {
 
     public int calculateFlightFare(Integer flightId){
         int noOfBookedFlight = ticketMap.get(flightId).size();
-        return 3000 + noOfBookedFlight*50;
+        return 3000 + (noOfBookedFlight*50);
     }
 
     public String bookATicket(Integer flightId, Integer passengerId){

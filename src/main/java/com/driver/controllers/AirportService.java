@@ -30,7 +30,7 @@ public class AirportService {
         return repositry.getNumberOfPeopleOn(date, airportName);
     }
     public int calculateFlightFare(Integer flightId){
-        return repositry.calculateRevenueOfAFlight(flightId);
+        return repositry.calculateFlightFare(flightId);
     }
     public String bookATicket(Integer flightId, Integer passengerId){
         return repositry.bookATicket(flightId, passengerId);
