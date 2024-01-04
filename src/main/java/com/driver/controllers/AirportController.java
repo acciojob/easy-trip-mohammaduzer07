@@ -16,42 +16,40 @@ import java.util.Objects;
 
 @RestController
 public class AirportController {
+
+    AirportService service = new AirportService();
     @PostMapping("/add_airport")
     public String addAirport(@RequestBody Airport airport){
 
         //Simply add airport details to your database
         //Return a String message "SUCCESS"
-
+        service.addAirport(airport);
         return "SUCCESS";
     }
-
     @GetMapping("/get-largest-aiport")
     public String getLargestAirportName(){
 
         //Largest airport is in terms of terminals. 3 terminal airport is larger than 2 terminal airport
         //Incase of a tie return the Lexicographically smallest airportName
-
-       return null;
+        return service.getLargestAirportName();
+//       return null;
     }
-
     @GetMapping("/get-shortest-time-travel-between-cities")
     public double getShortestDurationOfPossibleBetweenTwoCities(@RequestParam("fromCity") City fromCity, @RequestParam("toCity")City toCity){
 
         //Find the duration by finding the shortest flight that connects these 2 cities directly
         //If there is no direct flight between 2 cities return -1.
-
-       return 0;
+        return service.getShortestDurationOfPossibleBetweenTwoCities(fromCity, toCity);
+//       return 0;
     }
-
     @GetMapping("/get-number-of-people-on-airport-on/{date}")
     public int getNumberOfPeopleOn(@PathVariable("date") Date date,@RequestParam("airportName")String airportName){
 
         //Calculate the total number of people who have flights on that day on a particular airport
         //This includes both the people who have come for a flight and who have landed on an airport after their flight
 
-        return 0;
+        return service.getNumberOfPeopleOn(date, airportName);
     }
-
     @GetMapping("/calculate-fare")
     public int calculateFlightFare(@RequestParam("flightId")Integer flightId){
 
@@ -60,11 +58,9 @@ public class AirportController {
         //Suppose if 2 people have booked the flight already : the price of flight for the third person will be 3000 + 2*50 = 3100
         //This will not include the current person who is trying to book, he might also be just checking price
 
-       return 0;
+       return service.calculateFlightFare(flightId);
 
     }
-
-
     @PostMapping("/book-a-ticket")
     public String bookATicket(@RequestParam("flightId")Integer flightId,@RequestParam("passengerId")Integer passengerId){
 
@@ -73,9 +69,8 @@ public class AirportController {
         //Also if the passenger has already booked a flight then also return "FAILURE".
         //else if you are able to book a ticket then return "SUCCESS"
 
-        return null;
+        return service.bookATicket(flightId, passengerId);
     }
-
     @PutMapping("/cancel-a-ticket")
     public String cancelATicket(@RequestParam("flightId")Integer flightId,@RequestParam("passengerId")Integer passengerId){
 
@@ -84,35 +79,29 @@ public class AirportController {
         // Otherwise return a "SUCCESS" message
         // and also cancel the ticket that passenger had booked earlier on the given flightId
 
-       return null;
+       return service.cancelATicket(flightId, passengerId);
     }
-
-
     @GetMapping("/get-count-of-bookings-done-by-a-passenger/{passengerId}")
     public int countOfBookingsDoneByPassengerAllCombined(@PathVariable("passengerId")Integer passengerId){
 
         //Tell the count of flight bookings done by a passenger: This will tell the total count of flight bookings done by a passenger :
-       return 0;
+       return service.countOfBookingsDoneByPassengerAllCombined(passengerId);
     }
-
     @PostMapping("/add-flight")
     public String addFlight(@RequestBody Flight flight){
 
         //Return a "SUCCESS" message string after adding a flight.
-       return null;
+        service.addFlight(flight);
+        return "SUCCESS";
     }
-
-
     @GetMapping("/get-aiportName-from-flight-takeoff/{flightId}")
     public String getAirportNameFromFlightId(@PathVariable("flightId")Integer flightId){
 
         //We need to get the starting airportName from where the flight will be taking off (Hint think of City variable if that can be of some use)
         //return null incase the flightId is invalid or you are not able to find the airportName
 
-        return null;
+        return service.getAirportNameFromFlightId(flightId);
     }
-
-
     @GetMapping("/calculate-revenue-collected/{flightId}")
     public int calculateRevenueOfAFlight(@PathVariable("flightId")Integer flightId){
 
@@ -121,17 +110,15 @@ public class AirportController {
         //Revenue will also decrease if some passenger cancels the flight
 
 
-        return 0;
+        return service.calculateRevenueOfAFlight(flightId);
     }
-
-
     @PostMapping("/add-passenger")
     public String addPassenger(@RequestBody Passenger passenger){
 
         //Add a passenger to the database
         //And return a "SUCCESS" message if the passenger has been added successfully.
-
-       return null;
+        service.addPassenger(passenger);
+        return "SUCCESS";
     }
 
 
